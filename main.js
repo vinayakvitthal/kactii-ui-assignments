@@ -27,7 +27,6 @@ function animateCount(el, target, duration) {
     el.textContent = Math.floor(eased * target) + suffix;
     if (progress < 1) requestAnimationFrame(step);
   }
-
   requestAnimationFrame(step);
 }
 
@@ -41,7 +40,6 @@ function animateCount(el, target, duration) {
       }
     });
   }, { threshold: 0.5 });
-
   document.querySelectorAll('[data-target]').forEach(el => statsObserver.observe(el));
 })();
 
@@ -65,11 +63,8 @@ function animateCount(el, target, duration) {
 (function initNavbar() {
   const nav = document.querySelector('nav');
   if (!nav) return;
-
   window.addEventListener('scroll', () => {
-    nav.style.borderBottomColor = window.scrollY > 40
-      ? 'rgba(255,255,255,0.13)'
-      : 'rgba(255,255,255,0.07)';
+    nav.classList.toggle('scrolled', window.scrollY > 40);
   });
 })();
 
@@ -93,7 +88,6 @@ function animateCount(el, target, duration) {
   ];
 
   let jobId = 8824;
-
   function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
   setInterval(() => {
@@ -120,7 +114,6 @@ function animateCount(el, target, duration) {
     row.style.opacity    = '0';
     row.style.transition = 'opacity 0.4s';
     tbody.insertBefore(row, tbody.firstChild);
-
     requestAnimationFrame(() => { row.style.opacity = '1'; });
 
     /* keep table at max 5 rows */
