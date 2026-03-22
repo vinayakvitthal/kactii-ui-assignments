@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentset — Build AI Chat and Search</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Your stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════ -->
+<nav class="site-nav">
+  <div class="container-xl d-flex align-items-center gap-4 w-100">
+    <!-- Logo -->
+    <a href="#" class="nav-logo me-3">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      Agentset
+    </a>
+
+    <!-- Links -->
+    <div class="d-none d-md-flex align-items-center gap-4 flex-grow-1">
+      <a href="#docs"       class="nav-link-item">Docs</a>
+      <a href="#pricing"    class="nav-link-item">Pricing</a>
+      <a href="#enterprise" class="nav-link-item">Enterprise</a>
+      <a href="#resources"  class="nav-link-item">Resources</a>
+      <a href="#company"    class="nav-link-item">Company</a>
+    </div>
+
+    <!-- Right -->
+    <div class="d-flex align-items-center gap-2 ms-auto">
+      <a href="#" class="nav-gh d-none d-md-inline-flex">
+        <i class="bi bi-github"></i>
+        <span>1.9k</span>
+      </a>
+      <a href="#" class="btn-login">Login</a>
+      <a href="#" class="btn-primary-custom d-none d-sm-inline-flex">Get started</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <i class="bi bi-stars"></i>
+      No RAG expertise needed
+    </div>
+
+    <h1 class="display-serif">
+      The Toolkit for Building<br class="d-none d-md-block">
+      <em>AI Chat and Search</em>
+    </h1>
+
+    <p class="lead">
+      Agentset helps developers build AI apps that deliver reliable answers. No RAG expertise needed.
+    </p>
+
+    <div class="d-flex justify-content-center gap-3 mb-5">
+      <a href="#" class="btn-primary-custom">
+        Get started for free
+        <i class="bi bi-arrow-right"></i>
+      </a>
+      <a href="#" class="btn-outline-custom">
+        <i class="bi bi-calendar3"></i>
+        Schedule Demo
+      </a>
+    </div>
+
+    <!-- Tab switcher -->
+    <div class="hero-tabs">
+      <button class="hero-tab-btn active" data-tab="fullrag">Full RAG</button>
+      <button class="hero-tab-btn"        data-tab="extract">Extraction</button>
+      <button class="hero-tab-btn"        data-tab="chunk">Chunking</button>
+      <button class="hero-tab-btn"        data-tab="retrieve">Retrieval</button>
+    </div>
+
+    <!-- Screenshot -->
+    <div class="hero-screenshot-wrap">
+      <div class="hero-screenshot">
+        <div class="screenshot-bar">
+          <div class="s-dot" style="background:#ff5f57"></div>
+          <div class="s-dot" style="background:#febc2e"></div>
+          <div class="s-dot" style="background:#28c840"></div>
+          <span class="mono ms-3" style="font-size:0.72rem;color:var(--muted)">app.agentset.ai — namespace / documents</span>
+        </div>
+
+        <div class="screenshot-body">
+          <!-- Sidebar -->
+          <div class="ss-sidebar">
+            <div class="ss-nav-item active"><i class="bi bi-grid-fill"></i> Overview</div>
+            <div class="ss-nav-item"><i class="bi bi-file-earmark-text"></i> Documents</div>
+            <div class="ss-nav-item"><i class="bi bi-search"></i> Search</div>
+            <div class="ss-nav-item"><i class="bi bi-chat-dots"></i> Chat</div>
+            <div class="ss-nav-item"><i class="bi bi-cpu"></i> Namespaces</div>
+            <div class="ss-nav-item"><i class="bi bi-gear"></i> Settings</div>
+          </div>
+
+          <!-- Main -->
+          <div class="ss-main">
+            <div class="ss-header">
+              <div class="ss-title">Knowledge Base Overview</div>
+              <button class="btn-primary-custom" style="font-size:0.75rem;padding:6px 14px">
+                <i class="bi bi-plus"></i> Ingest
+              </button>
+            </div>
+
+            <div class="ss-stats">
+              <div class="ss-stat">
+                <div class="ss-stat-label">Documents</div>
+                <div class="ss-stat-val blue" id="doc-counter">0</div>
+              </div>
+              <div class="ss-stat">
+                <div class="ss-stat-label">Chunks</div>
+                <div class="ss-stat-val green">48,291</div>
+              </div>
+              <div class="ss-stat">
+                <div class="ss-stat-label">Queries</div>
+                <div class="ss-stat-val orange">1,204</div>
+              </div>
+            </div>
+
+            <div class="ss-doc-list">
+              <div class="ss-doc-item">
+                <div class="ss-doc-name">
+                  <div class="ss-doc-icon icon-pdf">PDF</div>
+                  Q3-Financial-Report.pdf
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                  <span class="mono" style="font-size:0.68rem;color:var(--muted)">2.4 MB</span>
+                  <span class="ss-badge badge-done">Ingested</span>
+                </div>
+              </div>
+              <div class="ss-doc-item">
+                <div class="ss-doc-name">
+                  <div class="ss-doc-icon icon-docx">DOC</div>
+                  Product-Specification-v2.docx
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                  <span class="mono" style="font-size:0.68rem;color:var(--muted)">845 KB</span>
+                  <span class="ss-badge badge-proc">Processing</span>
+                </div>
+              </div>
+              <div class="ss-doc-item">
+                <div class="ss-doc-name">
+                  <div class="ss-doc-icon icon-csv">CSV</div>
+                  customer-feedback-2024.csv
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                  <span class="mono" style="font-size:0.68rem;color:var(--muted)">12 MB</span>
+                  <span class="ss-badge badge-done">Ingested</span>
+                </div>
+              </div>
+              <div class="ss-doc-item">
+                <div class="ss-doc-name">
+                  <div class="ss-doc-icon icon-pptx">PPT</div>
+                  Company-Roadmap-2025.pptx
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                  <span class="mono" style="font-size:0.68rem;color:var(--muted)">5.1 MB</span>
+                  <span class="ss-badge badge-queue">Queued</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     LOGO CLOUD
+════════════════════════════════════════════ -->
+<div class="logo-cloud">
+  <div class="container">
+    <div class="logo-cloud-label">Trusted by leading engineering teams</div>
+    <div class="logo-cloud-row">
+      <span class="cloud-logo">Gyldendal</span>
+      <span class="cloud-logo">Mederva Health</span>
+      <span class="cloud-logo">SustainBridge</span>
+      <span class="cloud-logo">Vipps</span>
+      <span class="cloud-logo">Jibreel</span>
+      <span class="cloud-logo">Arcadia</span>
+      <span class="cloud-logo">Piedmont</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     PROBLEM SECTION
+════════════════════════════════════════════ -->
+<section class="problem-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 reveal">
+        <div class="section-eyebrow">The Problem</div>
+        <h2 class="display-serif mb-4" style="font-size:clamp(1.9rem,3.5vw,2.9rem)">
+          RAG apps work in demos but…
+        </h2>
+        <p class="mb-4" style="color:var(--muted);line-height:1.75">
+          When real users and data come into play they fall apart. Fixing those gaps takes months, and many rounds of reprocessing documents.
+        </p>
+        <p class="mb-4" style="color:var(--muted);line-height:1.75">
+          That's why we built Agentset. We spend time building deep optimizations so that you don't have to. Works out of the box and ready for production on day one.
+        </p>
+        <div class="d-flex gap-3 mt-4">
+          <div class="stat-pill">
+            <div class="stat-number">5M+</div>
+            <div class="stat-label">Documents parsed</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-number">1,500+</div>
+            <div class="stat-label">Teams served</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7 reveal">
+        <div class="problem-ui">
+          <div class="prob-ui-header">
+            <div class="s-dot" style="background:#ff5f57;width:10px;height:10px;border-radius:50%"></div>
+            <div class="s-dot" style="background:#febc2e;width:10px;height:10px;border-radius:50%"></div>
+            <div class="s-dot" style="background:#28c840;width:10px;height:10px;border-radius:50%"></div>
+            <span class="mono ms-2" style="font-size:0.72rem;color:var(--muted)">AI Chat Interface</span>
+          </div>
+          <div class="prob-ui-body">
+            <div class="chat-bubble user">
+              What are the key terms in Section 4.2 of the enterprise contract?
+            </div>
+            <div class="chat-bubble bot">
+              Based on the enterprise contract, Section 4.2 covers <strong>Intellectual Property Rights</strong>. The key terms include: (1) All work product created under this agreement remains the property of the client. (2) Vendor retains rights to pre-existing IP...
+              <br>
+              <span class="chat-source"><i class="bi bi-file-text"></i> enterprise-contract.pdf — Page 12</span>
+              <span class="chat-source ms-2"><i class="bi bi-check-circle"></i> 94% confidence</span>
+            </div>
+            <div class="chat-bubble user">
+              Summarize the payment schedule from the invoice batch
+            </div>
+            <div class="chat-bubble bot">
+              I found <strong>3 invoices</strong> in your knowledge base. Total outstanding: <strong>$84,200</strong>. Next payment due: March 31, 2026 — $28,000.
+              <br>
+              <span class="chat-source"><i class="bi bi-file-text"></i> invoices-q1-2026.pdf</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FEATURES
+════════════════════════════════════════════ -->
+<section class="features-section" id="features">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-eyebrow">Features</div>
+      <h2 class="display-serif" style="font-size:clamp(1.9rem,3.5vw,2.9rem)">Ship with confidence</h2>
+    </div>
+
+    <div class="row g-4 reveal">
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🎯</div>
+          <h5>Accurate Answers</h5>
+          <p>Get superb accuracy on your data before any customizations. Industry-setting benchmarks for MultiHopQA and FinanceBench.</p>
+          <a href="#" class="feature-link">Learn more <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🖼️</div>
+          <h5>Multimodal Support</h5>
+          <p>Agentset natively works with images, graphs, and tables just like text. Answer questions from every part of your knowledge base.</p>
+          <a href="#" class="feature-link">Learn more <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon-wrap">📎</div>
+          <h5>Citations</h5>
+          <p>Agentset automatically cites the sources of your answers, allowing your users to inspect and verify every response.</p>
+          <a href="#" class="feature-link">Learn more <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🔍</div>
+          <h5>Filters</h5>
+          <p>Agentset supports metadata filtering, allowing you to base answers on a precise subset of the data in your namespace.</p>
+          <a href="#" class="feature-link">Learn more <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🔗</div>
+          <h5>Preview Links</h5>
+          <p>Capture external feedback quickly using a customizable chat interface hosted by Agentset with your branding.</p>
+          <a href="#" class="feature-link">Learn more <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon-wrap">⚡</div>
+          <h5>Hybrid Search</h5>
+          <p>Combines semantic and keyword search with intelligent reranking for maximum retrieval precision across your entire corpus.</p>
+          <a href="#" class="feature-link">Learn more <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     DEVELOPER EXPERIENCE
+════════════════════════════════════════════ -->
+<section class="devex-section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-eyebrow">Developer Experience</div>
+      <h2 class="display-serif" style="font-size:clamp(1.9rem,3.5vw,2.9rem)">Built for developers</h2>
+    </div>
+
+    <!-- File type marquee -->
+    <div class="file-marquee-wrap mb-2 reveal">
+      <div class="file-marquee-row">
+        <span class="file-chip">.PDF</span><span class="file-chip">.DOCX</span>
+        <span class="file-chip">.PPTX</span><span class="file-chip">.XLSX</span>
+        <span class="file-chip">.CSV</span><span class="file-chip">.MD</span>
+        <span class="file-chip">.TXT</span><span class="file-chip">.HTML</span>
+        <span class="file-chip">.PNG</span><span class="file-chip">.JPEG</span>
+        <span class="file-chip">.BMP</span><span class="file-chip">.HEIC</span>
+        <span class="file-chip">.EML</span><span class="file-chip">.MSG</span>
+        <span class="file-chip">.RST</span><span class="file-chip">.XML</span>
+        <span class="file-chip">.ODT</span><span class="file-chip">.DOC</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="file-chip">.PDF</span><span class="file-chip">.DOCX</span>
+        <span class="file-chip">.PPTX</span><span class="file-chip">.XLSX</span>
+        <span class="file-chip">.CSV</span><span class="file-chip">.MD</span>
+        <span class="file-chip">.TXT</span><span class="file-chip">.HTML</span>
+        <span class="file-chip">.PNG</span><span class="file-chip">.JPEG</span>
+        <span class="file-chip">.BMP</span><span class="file-chip">.HEIC</span>
+        <span class="file-chip">.EML</span><span class="file-chip">.MSG</span>
+        <span class="file-chip">.RST</span><span class="file-chip">.XML</span>
+        <span class="file-chip">.ODT</span><span class="file-chip">.DOC</span>
+      </div>
+    </div>
+    <div class="file-marquee-wrap reveal">
+      <div class="file-marquee-row reverse">
+        <span class="file-chip">.TSV</span><span class="file-chip">.PPT</span>
+        <span class="file-chip">.EPUB</span><span class="file-chip">.RTF</span>
+        <span class="file-chip">.JSON</span><span class="file-chip">.YAML</span>
+        <span class="file-chip">.WEBP</span><span class="file-chip">.GIF</span>
+        <span class="file-chip">.ZIP</span><span class="file-chip">.TAR</span>
+        <span class="file-chip">.SVG</span><span class="file-chip">.TIFF</span>
+        <span class="file-chip">.TSV</span><span class="file-chip">.PPT</span>
+        <span class="file-chip">.EPUB</span><span class="file-chip">.RTF</span>
+        <span class="file-chip">.JSON</span><span class="file-chip">.YAML</span>
+        <span class="file-chip">.WEBP</span><span class="file-chip">.GIF</span>
+        <span class="file-chip">.ZIP</span><span class="file-chip">.TAR</span>
+        <span class="file-chip">.SVG</span><span class="file-chip">.TIFF</span>
+      </div>
+    </div>
+
+    <!-- Code tabs + integrations -->
+    <div class="row g-4 mt-3">
+      <div class="col-lg-6 reveal">
+        <p class="section-eyebrow mb-2">TypeScript &amp; Python SDKs</p>
+        <h4 class="fw-bold mb-3" style="font-size:1.3rem">22+ file formats. One API.</h4>
+        <p class="mb-4" style="color:var(--muted);font-size:0.9rem;line-height:1.7">
+          JavaScript and Python SDKs to upload your data with 22+ supported file formats. Ingest, search, and chat — all in a few lines.
+        </p>
+        <div class="code-tabs-wrap">
+          <div class="code-tab-bar">
+            <button class="code-tab-btn active" data-codetab="upload">upload.ts</button>
+            <button class="code-tab-btn" data-codetab="search">search.ts</button>
+            <button class="code-tab-btn" data-codetab="chat">chat.ts</button>
+          </div>
+
+          <!-- Upload -->
+          <div class="code-panel active" id="tab-upload">
+            <pre class="code-block"><span class="ck">import</span> { <span class="cf">Agentset</span> } <span class="ck">from</span> <span class="cs">"agentset"</span>;
+
+<span class="ck">const</span> agentset = <span class="ck">new</span> <span class="cf">Agentset</span>({
+  apiKey: <span class="cs">"agentset_xxx"</span>
+});
+
+<span class="ck">const</span> namespace = agentset.<span class="cf">namespace</span>(<span class="cs">"ns_1234"</span>);
+
+<span class="ck">const</span> ingestJob = <span class="ck">await</span> namespace.ingestion.<span class="cf">create</span>({
+  payload: {
+    type: <span class="cs">"FILE"</span>,
+    fileUrl: <span class="cs">"https://example.com/doc.pdf"</span>,
+    fileName: <span class="cs">"my-document.pdf"</span>
+  },
+  config: {
+    metadata: { foo: <span class="cs">"bar"</span> }
+  }
+});</pre>
+          </div>
+
+          <!-- Search -->
+          <div class="code-panel" id="tab-search">
+            <pre class="code-block"><span class="ck">import</span> { <span class="cf">Agentset</span> } <span class="ck">from</span> <span class="cs">"agentset"</span>;
+
+<span class="ck">const</span> agentset = <span class="ck">new</span> <span class="cf">Agentset</span>({
+  apiKey: <span class="cs">"agentset_xxx"</span>
+});
+
+<span class="ck">const</span> results = <span class="ck">await</span> agentset
+  .<span class="cf">namespace</span>(<span class="cs">"ns_1234"</span>)
+  .search.<span class="cf">query</span>({
+    query: <span class="cs">"payment terms section 4.2"</span>,
+    topK: <span class="cn">5</span>,
+    filters: {
+      metadata: { type: <span class="cs">"contract"</span> }
+    }
+  });
+
+console.<span class="cf">log</span>(results.hits);</pre>
+          </div>
+
+          <!-- Chat -->
+          <div class="code-panel" id="tab-chat">
+            <pre class="code-block"><span class="ck">import</span> { <span class="cf">Agentset</span> } <span class="ck">from</span> <span class="cs">"agentset"</span>;
+
+<span class="ck">const</span> agentset = <span class="ck">new</span> <span class="cf">Agentset</span>({
+  apiKey: <span class="cs">"agentset_xxx"</span>
+});
+
+<span class="ck">const</span> stream = <span class="ck">await</span> agentset
+  .<span class="cf">namespace</span>(<span class="cs">"ns_1234"</span>)
+  .chat.<span class="cf">stream</span>({
+    messages: [{
+      role: <span class="cs">"user"</span>,
+      content: <span class="cs">"What are the key terms?"</span>
+    }],
+    citations: <span class="ck">true</span>
+  });
+
+<span class="ck">for await</span> (<span class="ck">const</span> chunk <span class="ck">of</span> stream) {
+  process.stdout.<span class="cf">write</span>(chunk.text);
+}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="d-flex flex-column gap-4">
+          <!-- MCP -->
+          <div class="integ-card reveal">
+            <div class="d-flex align-items-start justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <div style="width:32px;height:32px;background:var(--bg3);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:1rem;">🔌</div>
+                <div>
+                  <div style="font-size:0.7rem;font-weight:700;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase">ModelContextProtocol</div>
+                  <div style="font-weight:700;font-size:0.92rem">MCP Server</div>
+                </div>
+              </div>
+              <span class="integ-tag">New</span>
+            </div>
+            <p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin:0 0 10px">
+              Bring your knowledge base to external applications through our MCP server. Works with Claude, Cursor, and any MCP-compatible client.
+            </p>
+            <a href="#" class="feature-link">Learn more <i class="bi bi-arrow-right"></i></a>
+          </div>
+
+          <!-- AI SDK -->
+          <div class="integ-card reveal">
+            <div class="d-flex align-items-start justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <div style="width:32px;height:32px;background:var(--bg3);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:1rem;">🤖</div>
+                <div>
+                  <div style="font-size:0.7rem;font-weight:700;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase">AI SDK</div>
+                  <div style="font-weight:700;font-size:0.92rem">AI SDK Integration</div>
+                </div>
+              </div>
+            </div>
+            <p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin:0 0 10px">
+              Use Agentset with Vercel's AI SDK, making it easy to integrate into your Next.js and React applications.
+            </p>
+            <a href="#" class="feature-link">Learn more <i class="bi bi-arrow-right"></i></a>
+          </div>
+
+          <!-- Model Agnostic -->
+          <div class="integ-card reveal">
+            <div class="d-flex align-items-start justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <div style="width:32px;height:32px;background:var(--bg3);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:1rem;">🧠</div>
+                <div>
+                  <div style="font-size:0.7rem;font-weight:700;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase">Model Agnostic</div>
+                  <div style="font-weight:700;font-size:0.92rem">Choose your own stack</div>
+                </div>
+              </div>
+            </div>
+            <div class="model-grid mt-2">
+              <span class="model-chip">OpenAI</span>
+              <span class="model-chip">Anthropic</span>
+              <span class="model-chip">Google AI</span>
+              <span class="model-chip">xAI Grok</span>
+              <span class="model-chip">Mistral</span>
+              <span class="model-chip">DeepSeek</span>
+              <span class="model-chip">Cohere</span>
+              <span class="model-chip">Pinecone</span>
+              <span class="model-chip">Qdrant</span>
+              <span class="model-chip">Azure</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════════ -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-eyebrow">Testimonials</div>
+      <h2 class="display-serif" style="font-size:clamp(1.9rem,3.5vw,2.9rem)">Trusted by leading teams</h2>
+    </div>
+
+    <div class="row g-4 reveal">
+      <div class="col-md-6 col-lg-4">
+        <div class="testi-card">
+          <p class="testi-quote">"We were looking for an AI-search provider to support our large legal corpus of 3 million pages. We now have a product line powered by Agentset."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-avatar">KS</div>
+            <div>
+              <div class="testi-name">Kristian Skeie</div>
+              <div class="testi-role">AI Lead, Gyldendal Rettsdata</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="testi-card">
+          <p class="testi-quote">"There's no room for error in Medicine. Agentset made our answers immediately more reliable and grounded in research."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#16a34a,#0070f3)">AS</div>
+            <div>
+              <div class="testi-name">Ahnaf Siddique</div>
+              <div class="testi-role">CTO, Mederva Health (YC W22)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="testi-card">
+          <p class="testi-quote">"We work with municipalities on content spanning hundreds of pages. We needed support for complex image search. Agentset worked out of the box."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#7c3aed,#e85d04)">RR</div>
+            <div>
+              <div class="testi-name">Ronny Reitan</div>
+              <div class="testi-role">CTO, SustainBridge</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="testi-card">
+          <p class="testi-quote">"When I used Agentset, it became clear that we could've saved weeks of work if we used it earlier."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#0070f3,#16a34a)">SM</div>
+            <div>
+              <div class="testi-name">Sven Malvik</div>
+              <div class="testi-role">Principal Architect, Vipps</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="testi-card">
+          <p class="testi-quote">"We switched away from Algolia and got better search in less than an hour of work."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#e85d04,#dc2626)">AA</div>
+            <div>
+              <div class="testi-name">Abdallah Abbas</div>
+              <div class="testi-role">CTO, Jibreel</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="testi-card d-flex align-items-center justify-content-center" style="background:var(--bg3);border-style:dashed;text-align:center">
+          <div>
+            <div style="font-size:1.8rem;margin-bottom:12px">🚀</div>
+            <div class="fw-700 mb-2" style="font-weight:700">Join them</div>
+            <p style="font-size:0.82rem;color:var(--muted);margin:0 0 14px">Start using Agentset to build AI your users can rely on.</p>
+            <a href="#" class="btn-primary-custom" style="font-size:0.8rem;padding:8px 16px">Get started free</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     COMPARISON
+════════════════════════════════════════════ -->
+<section class="compare-section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <h2 class="display-serif" style="font-size:clamp(1.9rem,3.5vw,2.9rem)">Reliable answers. Fewer surprises.</h2>
+    </div>
+
+    <div class="row g-4 justify-content-center reveal">
+      <!-- With Agentset -->
+      <div class="col-md-6 col-lg-5">
+        <div class="compare-card highlight">
+          <div class="compare-header dark">
+            <div>
+              <div style="font-size:0.7rem;font-weight:700;opacity:0.6;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px">With Agentset</div>
+              <div class="compare-title" style="color:#fff">One system out of the box</div>
+            </div>
+            <span style="font-size:1.3rem">✅</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-item">
+              <i class="bi bi-check-circle-fill check-icon"></i>
+              <span>Minimal setup, ready in minutes</span>
+            </div>
+            <div class="compare-item">
+              <i class="bi bi-check-circle-fill check-icon"></i>
+              <span>Agentic reasoning built-in</span>
+            </div>
+            <div class="compare-item">
+              <i class="bi bi-check-circle-fill check-icon"></i>
+              <span>Hybrid search + reranking for precision</span>
+            </div>
+            <div class="compare-item">
+              <i class="bi bi-check-circle-fill check-icon"></i>
+              <span>Automatic citations out of the box</span>
+            </div>
+            <div class="compare-item">
+              <i class="bi bi-check-circle-fill check-icon"></i>
+              <span>Managed infrastructure, zero ops burden</span>
+            </div>
+            <div class="compare-item">
+              <i class="bi bi-check-circle-fill check-icon"></i>
+              <span>22+ file formats supported natively</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Without Agentset -->
+      <div class="col-md-6 col-lg-5">
+        <div class="compare-card">
+          <div class="compare-header" style="background:var(--bg2)">
+            <div>
+              <div style="font-size:0.7rem;font-weight:700;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px">Without Agentset</div>
+              <div class="compare-title">You build it yourself</div>
+            </div>
+            <span style="font-size:1.3rem">😰</span>
+          </div>
+          <div class="compare-body">
+            <div class="compare-item" style="color:var(--muted)">
+              <i class="bi bi-x-circle-fill x-icon"></i>
+              <span>High learning curve for new developers</span>
+            </div>
+            <div class="compare-item" style="color:var(--muted)">
+              <i class="bi bi-x-circle-fill x-icon"></i>
+              <span>Complex setup, boilerplate heavy</span>
+            </div>
+            <div class="compare-item" style="color:var(--muted)">
+              <i class="bi bi-x-circle-fill x-icon"></i>
+              <span>Inconsistent retrieval quality</span>
+            </div>
+            <div class="compare-item" style="color:var(--muted)">
+              <i class="bi bi-x-circle-fill x-icon"></i>
+              <span>No built-in citations</span>
+            </div>
+            <div class="compare-item" style="color:var(--muted)">
+              <i class="bi bi-x-circle-fill x-icon"></i>
+              <span>Host your own infrastructure</span>
+            </div>
+            <div class="compare-item" style="color:var(--muted)">
+              <i class="bi bi-x-circle-fill x-icon"></i>
+              <span>Build an ingestion pipeline from scratch</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center mb-5 reveal">
+          <div class="section-eyebrow">FAQs</div>
+          <h2 class="display-serif" style="font-size:clamp(1.9rem,3.5vw,2.9rem)">Frequently asked questions</h2>
+        </div>
+
+        <div class="reveal">
+          <div class="faq-item">
+            <button class="faq-question">
+              What is Agentset?
+              <span class="faq-chevron"><i class="bi bi-chevron-down"></i></span>
+            </button>
+            <div class="faq-answer">
+              Agentset is the infrastructure for developers building production-ready RAG applications, powering search and Q&A inside their products. Most RAG systems work well in demos but struggle once real users and large document sets are involved. Agentset is designed for those production conditions, delivering reliable answers as data volume, usage, and complexity scale.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Who is Agentset for?
+              <span class="faq-chevron"><i class="bi bi-chevron-down"></i></span>
+            </button>
+            <div class="faq-answer">
+              Agentset is built for developers and engineering teams who need to embed reliable document search and Q&A into their products. It's especially valuable for teams who want production-quality RAG without spending months building and maintaining the infrastructure themselves.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Can large enterprises use Agentset?
+              <span class="faq-chevron"><i class="bi bi-chevron-down"></i></span>
+            </button>
+            <div class="faq-answer">
+              Yes. Agentset offers enterprise plans with dedicated support, private deployment options, SSO, audit logs, and SLAs. Contact the team to discuss your specific requirements.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Is Agentset a framework like LangChain or LlamaIndex?
+              <span class="faq-chevron"><i class="bi bi-chevron-down"></i></span>
+            </button>
+            <div class="faq-answer">
+              No. Unlike frameworks, Agentset is a managed service. You don't orchestrate pipelines or manage infrastructure — you call an API. This means faster setup, better reliability, and zero maintenance on your end.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Can Agentset work with my existing stack?
+              <span class="faq-chevron"><i class="bi bi-chevron-down"></i></span>
+            </button>
+            <div class="faq-answer">
+              Yes. Agentset is model-agnostic and lets you select your own vector database, embedding model, and LLM. It integrates with OpenAI, Anthropic, Google, Mistral, Cohere, Pinecone, Qdrant, and more.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Why not build this myself or in-house?
+              <span class="faq-chevron"><i class="bi bi-chevron-down"></i></span>
+            </button>
+            <div class="faq-answer">
+              Building a production-quality RAG system requires deep expertise in document parsing, chunking strategy, hybrid search, reranking, and agentic reasoning. It typically takes 3–6 months for an experienced team. Agentset gives you all of that on day one, so you can focus on your product.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CTA
+════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Try it free</div>
+      <h2 class="display-serif">
+        Prevent AI failures<br>from reaching users
+      </h2>
+      <p class="mt-3 mb-4" style="color:var(--muted);font-size:1.05rem;max-width:480px;margin:12px auto 28px;line-height:1.7">
+        Upload your documents and see how Agentset handles real-world data in minutes.
+      </p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="#" class="btn-primary-custom">
+          Try for free <i class="bi bi-arrow-right"></i>
+        </a>
+        <a href="#" class="btn-outline-custom">
+          <i class="bi bi-calendar3"></i>
+          Schedule Demo
+        </a>
+      </div>
+
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <div class="status-dot"></div>
+          Systems Operational
+        </div>
+        <div class="trust-badge">
+          <i class="bi bi-shield-check"></i>
+          SOC 2 Type II
+        </div>
+        <div class="trust-badge">
+          <i class="bi bi-heart-pulse"></i>
+          HIPAA Compliant
+        </div>
+        <div class="trust-badge">
+          <i class="bi bi-globe"></i>
+          GDPR Ready
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="row g-4 mb-4">
+      <!-- Brand -->
+      <div class="col-lg-3">
+        <a href="#" class="footer-logo">
+          <div class="logo-icon" style="width:24px;height:24px;background:var(--text);border-radius:5px;display:flex;align-items:center;justify-content:center;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          Agentset
+        </a>
+        <p style="font-size:0.83rem;color:var(--muted);line-height:1.7;max-width:220px;margin-bottom:20px">
+          The toolkit for building AI chat and search. No RAG expertise needed.
+        </p>
+        <div style="font-size:0.8rem;color:var(--muted)">© 2026 Agentset Inc.</div>
+      </div>
+
+      <!-- Product -->
+      <div class="col-6 col-md-3 col-lg-2">
+        <h6>Product</h6>
+        <a href="#" class="footer-link">Pricing</a>
+        <a href="#" class="footer-link">Documentation</a>
+        <a href="#" class="footer-link">Changelog</a>
+      </div>
+
+      <!-- Developers -->
+      <div class="col-6 col-md-3 col-lg-2">
+        <h6>Developers</h6>
+        <a href="#" class="footer-link">GitHub</a>
+        <a href="#" class="footer-link">RAG Prompts</a>
+        <a href="#" class="footer-link">API Reference</a>
+      </div>
+
+      <!-- Compare -->
+      <div class="col-6 col-md-3 col-lg-2">
+        <h6>Compare</h6>
+        <a href="#" class="footer-link">vs Ragie</a>
+        <a href="#" class="footer-link">vs Vectara</a>
+        <a href="#" class="footer-link">vs Graphlit</a>
+        <a href="#" class="footer-link">vs Credal</a>
+      </div>
+
+      <!-- Company -->
+      <div class="col-6 col-md-3 col-lg-2">
+        <h6>Company</h6>
+        <a href="#" class="footer-link">About</a>
+        <a href="#" class="footer-link">Careers</a>
+        <a href="#" class="footer-link">Blog</a>
+        <a href="#" class="footer-link">Contact</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div class="d-flex gap-4">
+        <a href="#" class="footer-link" style="margin:0">Privacy Policy</a>
+        <a href="#" class="footer-link" style="margin:0">Terms of Service</a>
+      </div>
+      <div class="d-flex gap-3">
+        <a href="#" class="footer-link" style="margin:0"><i class="bi bi-github fs-5"></i></a>
+        <a href="#" class="footer-link" style="margin:0"><i class="bi bi-twitter-x fs-5"></i></a>
+        <a href="#" class="footer-link" style="margin:0"><i class="bi bi-linkedin fs-5"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Your script -->
+<script src="main.js"></script>
+
+</body>
+</html>
