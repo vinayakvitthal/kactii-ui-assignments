@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dressige — Three Cultures. One Identity.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ivory:      #F2EAD3;
+      --cream:      #FAF4E8;
+      --warm-white: #FDFAF3;
+      --gold:       #C4A24A;
+      --gold-light: #E8D4A0;
+      --gold-dark:  #8B6918;
+      --burgundy:   #7C1C2C;
+      --burg-light: #9E2D3F;
+      --navy:       #1A2B47;
+      --navy-light: #2D4570;
+      --forest:     #1E3D2A;
+      --charcoal:   #26180E;
+      --muted:      #7A6750;
+      --border:     rgba(196,162,74,0.25);
+      --terracotta: #C4603A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: .4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--warm-white);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 32px;
+      height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-logo {
+      display: flex; flex-direction: column; align-items: center; gap: 1px;
+      text-decoration: none;
+    }
+    .nav-logo .wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 500;
+      letter-spacing: 0.22em;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+    .nav-logo .tagline-small {
+      font-size: 8px; letter-spacing: 0.25em;
+      color: var(--gold); text-transform: uppercase;
+      font-family: 'Jost', sans-serif; font-weight: 400;
+    }
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); font-weight: 500;
+      position: relative; transition: color .2s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+      height: 1px; background: var(--gold);
+      transform: scaleX(0); transition: transform .25s ease;
+    }
+    .nav-links a:hover { color: var(--charcoal); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-right {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); cursor: pointer;
+      transition: background .2s, color .2s;
+      background: transparent; border: none;
+    }
+    .nav-icon:hover { background: var(--ivory); color: var(--charcoal); }
+    .cart-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 20px; border-radius: 2px;
+      background: var(--burgundy); color: #fff;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      font-family: 'Jost', sans-serif; font-weight: 500;
+      text-decoration: none; transition: background .2s;
+    }
+    .cart-btn:hover { background: var(--burg-light); }
+    .cart-count {
+      background: var(--gold); color: var(--charcoal);
+      width: 18px; height: 18px; border-radius: 50%;
+      font-size: 10px; display: flex; align-items: center; justify-content: center;
+      font-weight: 600;
+    }
+
+    /* ── CULTURE STRIP ── */
+    .culture-strip {
+      background: var(--ivory);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 32px;
+      display: flex; align-items: center; justify-content: center; gap: 0;
+    }
+    .culture-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 32px;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); font-weight: 400;
+    }
+    .culture-item .icon { font-size: 18px; }
+    .culture-sep {
+      width: 1px; height: 28px; background: var(--border);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      background: var(--warm-white);
+      position: relative; overflow: hidden;
+    }
+
+    /* Brand Header */
+    .hero-header {
+      text-align: center;
+      padding: 48px 40px 28px;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-monogram {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px; letter-spacing: 0.35em; color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .hero-monogram::before, .hero-monogram::after {
+      content: ''; flex: 1; max-width: 80px; height: 1px; background: var(--gold-light);
+    }
+    .hero-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 9vw, 110px);
+      font-weight: 400; letter-spacing: 0.28em;
+      color: var(--charcoal); line-height: 1; margin-bottom: 10px;
+    }
+    .hero-tagline {
+      font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--muted); font-family: 'Jost', sans-serif;
+      font-weight: 300; margin-bottom: 20px;
+    }
+    .hero-cultures {
+      display: flex; align-items: center; justify-content: center; gap: 0;
+    }
+    .hero-culture-item {
+      display: flex; align-items: center; gap: 8px; padding: 0 28px;
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); font-family: 'Jost', sans-serif; font-weight: 400;
+    }
+    .hero-culture-icon { font-size: 20px; }
+    .hero-culture-sep { font-size: 14px; color: var(--gold); opacity: .6; }
+    .hero-cta {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; margin-top: 24px;
+    }
+
+    /* Buttons (shared) */
+    .btn-primary {
+      padding: 14px 36px; background: var(--burgundy); color: #fff;
+      font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+      font-family: 'Jost', sans-serif; font-weight: 500;
+      text-decoration: none; border-radius: 2px;
+      transition: background .2s, transform .2s; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--burg-light); transform: translateY(-1px); }
+    .btn-outline {
+      padding: 13px 32px; border: 1px solid var(--charcoal); color: var(--charcoal);
+      font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+      font-family: 'Jost', sans-serif; font-weight: 500;
+      text-decoration: none; border-radius: 2px;
+      transition: background .2s, color .2s; display: inline-block;
+    }
+    .btn-outline:hover { background: var(--charcoal); color: #fff; }
+
+    /* Model Strip */
+    .hero-models {
+      flex: 1; display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      min-height: 100vh;
+    }
+    .hero-model-cell {
+      position: relative; overflow: hidden;
+      border-right: 1px solid rgba(196,162,74,0.18); cursor: pointer;
+    }
+    .hero-model-cell:last-child { border-right: none; }
+    .hero-model-cell img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top; display: block;
+      transition: transform .6s cubic-bezier(.25,.46,.45,.94), filter .4s;
+      filter: brightness(.95) saturate(.9);
+    }
+    .hero-model-cell:hover img { transform: scale(1.05); filter: brightness(1.02) saturate(1.05); }
+    .hero-model-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 48px 14px 14px;
+      background: linear-gradient(to top, rgba(38,24,14,.72), transparent);
+      opacity: 0; transition: opacity .35s;
+    }
+    .hero-model-cell:hover .hero-model-overlay { opacity: 1; }
+    .hero-model-tag {
+      font-size: 8px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold-light);
+    }
+    .hero-model-num {
+      position: absolute; top: 12px; left: 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; color: rgba(255,255,255,.35); font-style: italic;
+    }
+
+    /* Bottom Info Bar */
+    .hero-info {
+      display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr;
+      background: var(--ivory); border-top: 1px solid var(--border);
+    }
+    .hero-info-divider { width: 1px; background: var(--border); margin: 20px 0; }
+    .hero-info-col { padding: 24px 36px; }
+    .hero-info-heading {
+      font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold-dark); font-family: 'Jost', sans-serif;
+      font-weight: 500; margin-bottom: 16px;
+    }
+
+    /* Swatches */
+    .hero-swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-swatch { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .hero-swatch-box {
+      width: 44px; height: 44px; border-radius: 2px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; background: var(--cream);
+    }
+    .hero-swatch-name {
+      font-size: 7px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-align: center; max-width: 56px; line-height: 1.4;
+    }
+
+    /* Silhouettes */
+    .hero-silhouettes { display: flex; gap: 18px; align-items: flex-end; }
+    .hero-sil { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .hero-sil svg {
+      width: 28px; height: 44px; stroke: var(--charcoal); fill: none;
+      stroke-width: 1.3; opacity: .6; transition: opacity .2s, stroke .2s;
+    }
+    .hero-sil:hover svg { opacity: 1; stroke: var(--burgundy); }
+    .hero-sil-name {
+      font-size: 7px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-align: center; max-width: 44px; line-height: 1.4;
+    }
+
+    /* Palette & Occasions */
+    .hero-palette { display: flex; gap: 8px; align-items: center; margin-bottom: 14px; }
+    .hero-palette-dot { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(0,0,0,.08); }
+    .hero-occasions { display: flex; gap: 16px; }
+    .hero-occasion { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .hero-occasion-icon { font-size: 18px; }
+    .hero-occasion-name {
+      font-size: 7px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ── PHILIPPINE ROOTS SPOTLIGHT ── */
+    .ph-roots-section {
+      background: var(--charcoal);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .ph-roots-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(196,162,74,0.08) 0%, transparent 60%),
+                  repeating-linear-gradient(45deg, transparent, transparent 80px, rgba(196,162,74,0.02) 80px, rgba(196,162,74,0.02) 81px);
+    }
+    .ph-roots-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      position: relative; z-index: 1;
+    }
+    .ph-roots-left {
+      padding: 96px 64px 96px 80px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .ph-roots-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 24px;
+      font-family: 'Jost', sans-serif; font-weight: 400;
+    }
+    .ph-roots-eyebrow::before {
+      content: ''; width: 28px; height: 1px; background: var(--gold);
+    }
+    .ph-roots-headline {
+      font-size: clamp(44px, 5vw, 72px);
+      color: #fff; line-height: 1.05;
+      margin-bottom: 24px;
+      font-family: 'Playfair Display', serif;
+    }
+    .ph-roots-headline em { color: var(--gold-light); font-style: italic; }
+    .ph-roots-body {
+      font-size: 14px; line-height: 1.9; color: rgba(255,255,255,.6);
+      font-weight: 300; max-width: 420px; margin-bottom: 40px;
+    }
+    .ph-roots-body strong { color: rgba(255,255,255,.85); font-weight: 400; }
+    .ph-threads-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: rgba(196,162,74,0.12);
+      margin-top: 0; border: 1px solid rgba(196,162,74,0.12);
+    }
+    .ph-thread {
+      background: rgba(255,255,255,0.03);
+      padding: 24px 20px;
+      transition: background .3s;
+    }
+    .ph-thread:hover { background: rgba(196,162,74,0.06); }
+    .ph-thread-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; color: var(--gold-light);
+      margin-bottom: 4px; font-weight: 400;
+    }
+    .ph-thread-type {
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px; opacity: .7;
+    }
+    .ph-thread-desc {
+      font-size: 12px; line-height: 1.7; color: rgba(255,255,255,.5);
+      font-weight: 300;
+    }
+    .ph-roots-right {
+      position: relative; overflow: hidden;
+      min-height: 600px;
+    }
+    .ph-roots-right img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: 15% center;
+      display: block;
+      filter: brightness(.85) saturate(.9);
+    }
+    .ph-roots-right-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--charcoal) 0%, transparent 30%);
+    }
+    .ph-roots-right-label {
+      position: absolute; bottom: 32px; right: 32px;
+      text-align: right;
+    }
+    .ph-roots-right-label p {
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold-light); opacity: .7; margin-bottom: 4px;
+    }
+    .ph-roots-right-label span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; color: #fff; font-style: italic;
+    }
+
+    /* ── GEN Z HIGHLIGHT STRIP ── */
+    .genz-strip {
+      background: var(--burgundy);
+      padding: 20px 40px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; overflow: hidden;
+    }
+    .genz-strip-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold-light); font-weight: 400; white-space: nowrap;
+    }
+    .genz-strip-item .bullet {
+      width: 4px; height: 4px; background: var(--gold);
+      border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 48px;
+    }
+    .section-label::before {
+      content: ''; width: 24px; height: 1px; background: var(--gold);
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .section-label h2 {
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold-dark); font-family: 'Jost', sans-serif; font-weight: 500;
+      white-space: nowrap;
+    }
+    .section-heading {
+      font-size: clamp(32px, 4vw, 52px);
+      color: var(--charcoal); line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .section-heading em { font-style: italic; color: var(--burgundy); }
+
+    /* ── THREE CULTURES ── */
+    .cultures-section {
+      padding: 96px 80px;
+      background: var(--warm-white);
+    }
+    .cultures-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 2px;
+      margin-top: 64px;
+    }
+    .culture-card {
+      position: relative; padding: 64px 48px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .culture-card::before {
+      content: ''; position: absolute; inset: 0;
+      opacity: 0; transition: opacity .4s;
+    }
+    .culture-card:hover::before { opacity: 1; }
+    .culture-card.ph {
+      background: var(--navy);
+      padding: 72px 56px;
+    }
+    .culture-card.ph::before { background: linear-gradient(135deg, #1A2B47, #0D1B30); }
+    .culture-card.ca { background: var(--ivory); }
+    .culture-card.ca::before { background: linear-gradient(135deg, #F2EAD3, #E8D4A0); }
+    .culture-card.in { background: var(--burgundy); color: #fff; }
+    .culture-card.in::before { background: linear-gradient(135deg, #7C1C2C, #A83248); }
+    .culture-card > * { position: relative; z-index: 1; }
+
+    .culture-featured-badge {
+      display: inline-block;
+      background: var(--gold); color: var(--charcoal);
+      font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+      font-family: 'Jost', sans-serif; font-weight: 700;
+      padding: 4px 10px; margin-bottom: 20px;
+    }
+    .culture-icon {
+      width: 72px; height: 72px;
+      margin: 0 auto 28px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .culture-card.ph .culture-icon { border: 1px solid rgba(196,162,74,0.4); }
+    .culture-card.ca .culture-icon { border: 1px solid var(--gold); }
+    .culture-card.in .culture-icon { border: 1px solid rgba(255,255,255,0.25); }
+    .culture-name {
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      margin-bottom: 12px; font-family: 'Jost', sans-serif; font-weight: 500;
+    }
+    .culture-card.ph .culture-name { color: var(--gold); }
+    .culture-card.ca .culture-name { color: var(--gold-dark); }
+    .culture-card.in .culture-name { color: var(--gold-light); opacity: .8; }
+    .culture-title {
+      font-size: 30px; line-height: 1.2; margin-bottom: 16px;
+    }
+    .culture-card.ph .culture-title { color: #fff; font-size: 34px; }
+    .culture-card.ca .culture-title { color: var(--charcoal); }
+    .culture-card.in .culture-title { color: #fff; }
+    .culture-desc {
+      font-size: 13px; line-height: 1.78; font-weight: 300;
+    }
+    .culture-card.ph .culture-desc { color: rgba(255,255,255,.65); }
+    .culture-card.ca .culture-desc { color: var(--muted); }
+    .culture-card.in .culture-desc { color: rgba(255,255,255,.7); }
+    .culture-detail {
+      margin-top: 28px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .culture-detail::before, .culture-detail::after {
+      content: ''; width: 20px; height: 1px;
+    }
+    .culture-card.ph .culture-detail { color: var(--gold-light); opacity: .7; }
+    .culture-card.ph .culture-detail::before, .culture-card.ph .culture-detail::after { background: var(--gold-light); opacity: .5; }
+    .culture-card.ca .culture-detail { color: var(--gold-dark); }
+    .culture-card.ca .culture-detail::before, .culture-card.ca .culture-detail::after { background: var(--gold); }
+    .culture-card.in .culture-detail { color: var(--gold-light); opacity: .7; }
+    .culture-card.in .culture-detail::before, .culture-card.in .culture-detail::after { background: var(--gold-light); opacity: .5; }
+
+    /* ── TERNO FEATURE ── */
+    .terno-section {
+      background: var(--ivory);
+      padding: 96px 80px;
+      position: relative; overflow: hidden;
+    }
+    .terno-section::before {
+      content: '';
+      position: absolute; right: -100px; top: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,162,74,0.08) 0%, transparent 70%);
+    }
+    .terno-inner {
+      max-width: 1280px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .terno-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px; margin-top: 64px;
+    }
+    .terno-card {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      padding: 36px 28px;
+      position: relative;
+      transition: border-color .3s, transform .3s;
+      cursor: default;
+    }
+    .terno-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    .terno-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px; color: var(--gold); opacity: .2;
+      line-height: 1; margin-bottom: 12px; font-style: italic;
+    }
+    .terno-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; color: var(--charcoal);
+      margin-bottom: 6px; font-weight: 500;
+    }
+    .terno-origin {
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold-dark); margin-bottom: 14px; font-weight: 400;
+    }
+    .terno-desc {
+      font-size: 13px; line-height: 1.75; color: var(--muted);
+      font-weight: 300;
+    }
+    .terno-tag {
+      display: inline-block; margin-top: 16px;
+      background: var(--ivory); border: 1px solid var(--border);
+      padding: 4px 10px;
+      font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold-dark); font-weight: 500;
+    }
+
+    /* ── CATEGORIES ── */
+    .categories-section {
+      padding: 96px 80px;
+      background: var(--warm-white);
+    }
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 0;
+    }
+    .category-card {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .category-card .cat-bg {
+      width: 100%; height: 100%;
+      transition: transform .5s ease;
+    }
+    .category-card:hover .cat-bg { transform: scale(1.04); }
+    .category-card .cat-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,18,14,0.7) 0%, transparent 55%);
+      transition: opacity .3s;
+    }
+    .category-card:hover .cat-overlay { opacity: .9; }
+    .category-card .cat-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 24px 20px;
+    }
+    .cat-name {
+      font-size: 18px; color: #fff;
+      font-family: 'Cormorant Garamond', serif; font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .cat-count {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold-light); font-family: 'Jost', sans-serif; font-weight: 400;
+    }
+    .cat-arrow {
+      position: absolute; top: 20px; right: 20px;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; opacity: 0; transition: opacity .3s;
+    }
+    .category-card:hover .cat-arrow { opacity: 1; }
+
+    .cb1 { background: linear-gradient(160deg, #E8D4A0 0%, #C4A24A 100%); }
+    .cb2 { background: linear-gradient(160deg, #1A2B47 0%, #0D1B30 100%); }
+    .cb3 { background: linear-gradient(160deg, #7C1C2C 0%, #4A0F1A 100%); }
+    .cb4 { background: linear-gradient(160deg, #2D4570 0%, #1A2B47 100%); }
+
+    /* ── PRODUCTS ── */
+    .products-section {
+      padding: 96px 80px;
+      background: var(--ivory);
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .product-card {
+      position: relative; cursor: pointer;
+      text-decoration: none; color: inherit; display: block;
+    }
+    .product-img-wrap {
+      aspect-ratio: 3/4; overflow: hidden;
+      margin-bottom: 16px; position: relative;
+      background: var(--cream);
+    }
+    .product-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.06); }
+    .product-badge {
+      position: absolute; top: 12px; left: 12px;
+      padding: 4px 10px;
+      font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+      font-family: 'Jost', sans-serif; font-weight: 500;
+    }
+    .badge-new { background: var(--navy); color: var(--gold-light); }
+    .badge-sale { background: var(--burgundy); color: #fff; }
+    .badge-ph {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(250,244,232,0.15);
+      border: 1px solid rgba(196,162,74,0.5);
+      backdrop-filter: blur(6px);
+      padding: 4px 8px;
+      font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold-light); font-weight: 500;
+    }
+    .product-quick {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 12px 16px;
+      background: rgba(26,18,14,0.88);
+      color: #fff; font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; text-align: center;
+      font-family: 'Jost', sans-serif; font-weight: 500;
+      transform: translateY(100%); transition: transform .3s;
+    }
+    .product-card:hover .product-quick { transform: translateY(0); }
+    .product-name {
+      font-size: 17px; color: var(--charcoal); margin-bottom: 4px;
+      font-weight: 400;
+    }
+    .product-origin {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold-dark); margin-bottom: 8px; font-weight: 400;
+    }
+    .product-price {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .price { font-size: 16px; font-weight: 500; color: var(--charcoal); }
+    .price-old { font-size: 13px; color: var(--muted); text-decoration: line-through; }
+
+    /* ── ETHOS SECTION ── */
+    .ethos-section {
+      padding: 120px 80px;
+      background: var(--navy);
+      position: relative; overflow: hidden;
+    }
+    .ethos-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(196,162,74,0.04) 60px, rgba(196,162,74,0.04) 61px),
+        repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(196,162,74,0.04) 60px, rgba(196,162,74,0.04) 61px);
+    }
+    .ethos-inner {
+      max-width: 1280px; margin: 0 auto;
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 96px; align-items: center;
+    }
+    .ethos-left .eyebrow {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'Jost', sans-serif; font-weight: 400;
+    }
+    .ethos-left .eyebrow::before {
+      content: ''; width: 32px; height: 1px; background: var(--gold);
+    }
+    .ethos-heading {
+      font-size: clamp(40px, 4vw, 60px); color: #fff;
+      line-height: 1.1; margin-bottom: 24px;
+    }
+    .ethos-heading em { color: var(--gold-light); font-style: italic; }
+    .ethos-body {
+      font-size: 15px; line-height: 1.85; color: rgba(255,255,255,.65);
+      font-weight: 300; margin-bottom: 40px;
+    }
+    .ethos-stats {
+      display: flex; gap: 40px; margin-bottom: 44px;
+    }
+    .stat-item { text-align: left; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px; color: var(--gold);
+      line-height: 1; margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,.5); font-weight: 400;
+    }
+    .ethos-right {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .ethos-img {
+      aspect-ratio: 3/4; border-radius: 2px;
+    }
+    .ethos-img:nth-child(2) { margin-top: 40px; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
+      padding: 96px 80px;
+      background: var(--warm-white);
+    }
+    .testimonials-section .inner {
+      max-width: 1280px; margin: 0 auto;
+    }
+    .testimonials-header {
+      text-align: center; margin-bottom: 64px;
+    }
+    .testi-eyebrow {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold-dark); margin-bottom: 16px;
+      font-family: 'Jost', sans-serif;
+    }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testi-card {
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+      position: relative;
+    }
+    .testi-card::before {
+      content: '\201C';
+      position: absolute; top: -12px; left: 28px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px; color: var(--gold); line-height: 1;
+    }
+    .testi-stars {
+      display: flex; gap: 3px; margin-bottom: 20px;
+    }
+    .star {
+      width: 12px; height: 12px; fill: var(--gold);
+    }
+    .testi-text {
+      font-size: 17px; line-height: 1.8; color: var(--muted);
+      font-style: italic; font-family: 'Cormorant Garamond', serif;
+      font-weight: 400; margin-bottom: 24px;
+    }
+    .testi-author {
+      display: flex; align-items: center; gap: 12px;
+      border-top: 1px solid var(--border); padding-top: 20px;
+    }
+    .testi-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 18px;
+      color: var(--warm-white); font-weight: 500; flex-shrink: 0;
+    }
+    .av1 { background: var(--navy); }
+    .av2 { background: var(--burgundy); }
+    .av3 { background: var(--forest); }
+    .testi-name {
+      font-size: 14px; font-weight: 500; color: var(--charcoal);
+    }
+    .testi-role {
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold-dark); font-weight: 400;
+    }
+
+    /* ── BLOG ── */
+    .blog-section {
+      padding: 96px 80px;
+      background: var(--ivory);
+    }
+    .blog-grid {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 24px;
+    }
+    .blog-card {
+      text-decoration: none; color: inherit;
+      display: block; position: relative;
+    }
+    .blog-img {
+      aspect-ratio: 16/10; overflow: hidden; margin-bottom: 20px;
+    }
+    .blog-card:first-child .blog-img { aspect-ratio: 16/11; }
+    .blog-img-inner {
+      width: 100%; height: 100%;
+      transition: transform .5s ease;
+    }
+    .blog-card:hover .blog-img-inner { transform: scale(1.04); }
+    .bb1 { background: linear-gradient(155deg, #E8D4A0, #C4A24A); }
+    .bb2 { background: linear-gradient(155deg, #1A2B47, #2D4570); }
+    .bb3 { background: linear-gradient(155deg, #7C1C2C, #9E2D3F); }
+    .blog-tag {
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold-dark); margin-bottom: 10px;
+      font-family: 'Jost', sans-serif; font-weight: 500;
+    }
+    .blog-title {
+      font-size: 22px; color: var(--charcoal); line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .blog-card:first-child .blog-title { font-size: 28px; }
+    .blog-excerpt {
+      font-size: 13px; line-height: 1.7; color: var(--muted);
+      font-weight: 300;
+    }
+    .blog-read-more {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 14px;
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--charcoal); font-weight: 500;
+      transition: gap .2s;
+    }
+    .blog-card:hover .blog-read-more { gap: 14px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,.65);
+    }
+    .footer-top {
+      max-width: 1280px; margin: 0 auto;
+      padding: 80px 80px 64px;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 64px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .footer-brand .wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 400; letter-spacing: 0.18em;
+      color: #fff; margin-bottom: 6px;
+    }
+    .footer-brand .brand-tagline {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .footer-brand p {
+      font-size: 13px; line-height: 1.8; font-weight: 300;
+      max-width: 260px;
+    }
+    .footer-cultures {
+      display: flex; gap: 8px; margin-top: 24px;
+    }
+    .fcult {
+      padding: 5px 12px; border: 1px solid rgba(196,162,74,0.3);
+      font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold-light); opacity: .7;
+    }
+    .footer-col h4 {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 24px;
+      font-family: 'Jost', sans-serif; font-weight: 500;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul li a {
+      text-decoration: none; font-size: 13px; font-weight: 300;
+      color: rgba(255,255,255,.55); transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--gold-light); }
+    .footer-bottom {
+      max-width: 1280px; margin: 0 auto;
+      padding: 24px 80px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: 11px; color: rgba(255,255,255,.3); letter-spacing: 0.04em; }
+    .payment-icons { display: flex; gap: 8px; align-items: center; }
+    .pay-badge {
+      padding: 4px 10px; border-radius: 3px;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
+    }
+    .pay-gcash { background: #007DFF; color: #fff; }
+    .pay-paymaya { background: #00C45C; color: #fff; }
+    .pay-visa { background: #1A1F71; color: #fff; font-style: italic; font-size: 11px; }
+    .pay-cod { background: #4CAF50; color: #fff; }
+
+    /* ── PAGE LOAD ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-monogram { animation: fadeUp .6s .05s both; }
+    .hero-brand    { animation: fadeUp .8s .18s both; }
+    .hero-tagline  { animation: fadeUp .7s .32s both; }
+    .hero-cultures { animation: fadeUp .6s .44s both; }
+    .hero-cta      { animation: fadeUp .6s .56s both; }
+    .hero-models   { animation: fadeUp .7s .30s both; }
+    .hero-info     { animation: fadeUp .6s .55s both; }
+    .culture-strip { animation: fadeUp .6s .15s both; }
+
+    /* ── WRAPPER FOR CONTENT SECTIONS ── */
+    .section-inner {
+      max-width: 1280px; margin: 0 auto;
+    }
+
+    /* ── UTILITIES ── */
+    .gold { color: var(--gold); }
+    .mb-0 { margin-bottom: 0; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .hero-models { grid-template-columns: repeat(3, 1fr); min-height: 360px; }
+      .hero-model-cell:nth-child(4), .hero-model-cell:nth-child(5), .hero-model-cell:nth-child(6) { display: none; }
+      .hero-info { grid-template-columns: 1fr; }
+      .hero-info-divider { display: none; }
+      .ph-roots-inner { grid-template-columns: 1fr; }
+      .ph-roots-right { min-height: 380px; }
+      .cultures-layout { grid-template-columns: 1fr; gap: 2px; }
+      .terno-grid { grid-template-columns: repeat(2,1fr); }
+      .categories-grid { grid-template-columns: repeat(2,1fr); }
+      .products-grid { grid-template-columns: repeat(2,1fr); }
+      .ethos-inner { grid-template-columns: 1fr; gap: 48px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      .cultures-section, .categories-section, .products-section,
+      .ethos-section, .testimonials-section, .blog-section,
+      .terno-section { padding: 64px 24px; }
+      .ph-roots-left { padding: 64px 24px; }
+      .genz-strip { flex-direction: column; gap: 12px; padding: 16px 24px; }
+      .footer-top { padding: 48px 24px; grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+      .nav-inner { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero-models { grid-template-columns: repeat(2, 1fr); min-height: 280px; }
+      .hero-model-cell:nth-child(3), .hero-model-cell:nth-child(4), .hero-model-cell:nth-child(5), .hero-model-cell:nth-child(6) { display: none; }
+      .hero-info-col { padding: 20px 20px; }
+      .terno-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <span class="wordmark">DRESSIGE</span>
+      <span class="tagline-small">Heritage · Modern · Multicultural</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/shop">Collections</a></li>
+      <li><a href="/shop?culture=philippines">Philippines</a></li>
+      <li><a href="/shop?culture=canada">Canada</a></li>
+      <li><a href="/shop?culture=india">India</a></li>
+      <li><a href="/blogs">Journal</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-icon" title="Search">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="nav-icon" title="Account">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <a href="/cart" class="cart-btn">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Bag
+        <span class="cart-count">3</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── CULTURE STRIP ── -->
+<div class="culture-strip">
+  <div class="culture-item">
+    <span class="icon">☀️</span>
+    <span>Philippines</span>
+  </div>
+  <div class="culture-sep"></div>
+  <div class="culture-item">
+    <span class="icon">🍁</span>
+    <span>Canada</span>
+  </div>
+  <div class="culture-sep"></div>
+  <div class="culture-item">
+    <span class="icon">🪷</span>
+    <span>India</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+
+  <!-- Model Strip -->
+  <div class="hero-models">
+    <div class="hero-model-cell">
+      <span class="hero-model-num">01</span>
+      <img src="images/1 (2).png" alt="Philippine Sun Embroidery" style="object-position: center top;" />
+      <div class="hero-model-overlay">
+        <div class="hero-model-tag">Philippine Sun Embroidery</div>
+      </div>
+    </div>
+    <div class="hero-model-cell">
+      <span class="hero-model-num">02</span>
+      <img src="images/2.png" alt="Filipino Weave" style="object-position: center top;" />
+      <div class="hero-model-overlay">
+        <div class="hero-model-tag">Filipino Weave Inspired</div>
+      </div>
+    </div>
+    <div class="hero-model-cell">
+      <span class="hero-model-num">03</span>
+      <img src="images/3.png" alt="Indian Zardozi Embroidery" style="object-position: center top;" />
+      <div class="hero-model-overlay">
+        <div class="hero-model-tag">Indian Zardozi Embroidery</div>
+      </div>
+    </div>
+    <div class="hero-model-cell">
+      <span class="hero-model-num">04</span>
+      <img src="images/4.png" alt="Canadian Maple" style="object-position: center top;" />
+      <div class="hero-model-overlay">
+        <div class="hero-model-tag">Canadian Maple Inspired</div>
+      </div>
+    </div>
+    <div class="hero-model-cell">
+      <span class="hero-model-num">05</span>
+      <img src="images/5.png" alt="Indian Block Print" style="object-position: center top;" />
+      <div class="hero-model-overlay">
+        <div class="hero-model-tag">Indian Block Print</div>
+      </div>
+    </div>
+    <div class="hero-model-cell">
+      <span class="hero-model-num">06</span>
+      <img src="images/6.png" alt="Heritage Fusion" style="object-position: center top;" />
+      <div class="hero-model-overlay">
+        <div class="hero-model-tag">Heritage Fusion</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-info" style="display:none">
+    <!-- Cultural Design Elements -->
+    <div class="hero-info-col">
+      <div class="hero-info-heading">Cultural Design Elements</div>
+      <div class="hero-swatches">
+        <div class="hero-swatch">
+          <div class="hero-swatch-box">☀️</div>
+          <div class="hero-swatch-name">Philippine Sun</div>
+        </div>
+        <div class="hero-swatch">
+          <div class="hero-swatch-box">🧵</div>
+          <div class="hero-swatch-name">Filipino Weave</div>
+        </div>
+        <div class="hero-swatch">
+          <div class="hero-swatch-box">✨</div>
+          <div class="hero-swatch-name">Indian Zardozi</div>
+        </div>
+        <div class="hero-swatch">
+          <div class="hero-swatch-box">🍁</div>
+          <div class="hero-swatch-name">Canadian Maple</div>
+        </div>
+        <div class="hero-swatch">
+          <div class="hero-swatch-box">🌿</div>
+          <div class="hero-swatch-name">Block Print</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-info-divider"></div>
+
+    <!-- Modern Silhouettes -->
+    <div class="hero-info-col">
+      <div class="hero-info-heading">Modern Silhouette</div>
+      <div class="hero-silhouettes">
+        <div class="hero-sil">
+          <svg viewBox="0 0 28 44"><path d="M14 3 C10 3 5 7 4 13 L4 41 L13 41 L13 19 C14 21 15 21 15 21 L15 41 L24 41 L24 13 C23 7 18 3 14 3Z"/></svg>
+          <div class="hero-sil-name">Wrap Detail</div>
+        </div>
+        <div class="hero-sil">
+          <svg viewBox="0 0 28 44"><path d="M11 2 Q7 2 3 7 Q1 5 1 9 Q1 13 5 13 L5 32 Q5 36 9 38 L19 38 Q23 36 23 32 L23 13 Q27 13 27 9 Q27 5 25 7 Q21 2 17 2 Z"/></svg>
+          <div class="hero-sil-name">Puff Sleeve</div>
+        </div>
+        <div class="hero-sil">
+          <svg viewBox="0 0 28 44"><path d="M14 2 L9 7 L3 13 L3 42 L25 42 L25 13 L19 7 Z M14 2 L14 8"/></svg>
+          <div class="hero-sil-name">Halter Neck</div>
+        </div>
+        <div class="hero-sil">
+          <svg viewBox="0 0 28 44"><path d="M7 2 L3 12 L3 42 L25 34 L25 12 L21 2 Z"/></svg>
+          <div class="hero-sil-name">Asymm. Cut</div>
+        </div>
+        <div class="hero-sil">
+          <svg viewBox="0 0 28 44"><path d="M12 2 L3 7 L3 42 L25 42 L25 7 L16 2 Z M16 28 L25 33"/></svg>
+          <div class="hero-sil-name">Tie Side</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-info-divider"></div>
+
+    <!-- Color Palette & Occasions -->
+    <div class="hero-info-col">
+      <div class="hero-info-heading">Color Palette</div>
+      <div class="hero-palette">
+        <div class="hero-palette-dot" style="background:#F2EAD3"></div>
+        <div class="hero-palette-dot" style="background:#C4A24A"></div>
+        <div class="hero-palette-dot" style="background:#7C1C2C"></div>
+        <div class="hero-palette-dot" style="background:#1A2B47"></div>
+        <div class="hero-palette-dot" style="background:#1E3D2A"></div>
+      </div>
+      <div class="hero-info-heading" style="margin-top:14px">Occasion</div>
+      <div class="hero-occasions">
+        <div class="hero-occasion">
+          <span class="hero-occasion-icon">👗</span>
+          <span class="hero-occasion-name">Casual</span>
+        </div>
+        <div class="hero-occasion">
+          <span class="hero-occasion-icon">💼</span>
+          <span class="hero-occasion-name">Workwear</span>
+        </div>
+        <div class="hero-occasion">
+          <span class="hero-occasion-icon">🎭</span>
+          <span class="hero-occasion-name">Events</span>
+        </div>
+        <div class="hero-occasion">
+          <span class="hero-occasion-icon">✈️</span>
+          <span class="hero-occasion-name">Travel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── GEN Z STRIP ── -->
+<div class="genz-strip">
+  <div class="genz-strip-item">
+    <div class="bullet"></div>
+    Terno Butterfly Sleeves — Filipino Formal Reimagined
+  </div>
+  <div class="genz-strip-item">
+    <div class="bullet"></div>
+    Piña Cloth — Luxury Pineapple Fibre
+  </div>
+  <div class="genz-strip-item">
+    <div class="bullet"></div>
+    Inabel Weave — Handcrafted in Ilocos
+  </div>
+  <div class="genz-strip-item">
+    <div class="bullet"></div>
+    Free Shipping Over ₱1,500
+  </div>
+</div>
+
+<!-- ── PHILIPPINE ROOTS ── -->
+<section class="ph-roots-section" id="ph-roots">
+  <div class="ph-roots-inner">
+    <div class="ph-roots-left">
+      <p class="ph-roots-eyebrow">Philippine Heritage</p>
+      <h2 class="ph-roots-headline">
+        Your <em>Filipino</em><br/>
+        roots are<br/>
+        trending.
+      </h2>
+      <p class="ph-roots-body">
+        Traditional Philippine clothing isn't just fashion — it's a <strong>statement of identity</strong>. We've taken the most iconic Filipino textiles and silhouettes and made them undeniably Gen Z. Because wearing your culture has never been more chic.
+      </p>
+      <div class="ph-threads-grid">
+        <div class="ph-thread">
+          <p class="ph-thread-name">Terno</p>
+          <p class="ph-thread-type">Butterfly Sleeve · Formal</p>
+          <p class="ph-thread-desc">The iconic Filipino butterfly sleeve, softened into everyday puff-shoulder tops.</p>
+        </div>
+        <div class="ph-thread">
+          <p class="ph-thread-name">Piña</p>
+          <p class="ph-thread-type">Pineapple Fibre · Luxury</p>
+          <p class="ph-thread-desc">The world's rarest luxury fabric — woven from pineapple leaf fibres in Kalibo, Aklan.</p>
+        </div>
+        <div class="ph-thread">
+          <p class="ph-thread-name">Inabel</p>
+          <p class="ph-thread-type">Ilocano Weave · Heritage</p>
+          <p class="ph-thread-desc">Bold geometric patterns handwoven on traditional wooden looms in Ilocos Norte.</p>
+        </div>
+        <div class="ph-thread">
+          <p class="ph-thread-name">T'nalak</p>
+          <p class="ph-thread-type">T'boli Tribe · Indigenous</p>
+          <p class="ph-thread-desc">Dream-woven abaca cloth from Mindanao, each piece a spiritual vision in thread.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ph-roots-right">
+      <img src="images/p5-1.png" alt="Philippine traditional clothing — Dressige" />
+      <div class="ph-roots-right-grad"></div>
+      <div class="ph-roots-right-label">
+        <p>Inspired by</p>
+        <span>Filipino Craft</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THREE CULTURES ── -->
+<section class="cultures-section" id="cultures">
+  <div class="section-inner">
+    <div class="section-label"><h2>Our Identity</h2></div>
+    <div style="max-width:560px">
+      <h2 class="section-heading">Three heritages,<br/><em>one vision</em></h2>
+      <p style="font-size:15px;line-height:1.8;color:var(--muted);font-weight:300;margin-bottom:0">Every piece carries the spirit of its origin — meticulously interpreted for the modern wardrobe.</p>
+    </div>
+    <div class="cultures-layout">
+      <!-- Philippines — featured (larger) -->
+      <div class="culture-card ph">
+        <span class="culture-featured-badge">Featured Heritage</span>
+        <div class="culture-icon">
+          <svg width="36" height="36" viewBox="0 0 100 100">
+            <g transform="translate(50,50)" fill="none" stroke="#C4A24A" stroke-width="2">
+              <circle r="16"/><circle r="9"/>
+              <line x1="0" y1="-36" x2="0" y2="-20"/>
+              <line x1="0" y1="20" x2="0" y2="36"/>
+              <line x1="-36" y1="0" x2="-20" y2="0"/>
+              <line x1="20" y1="0" x2="36" y2="0"/>
+              <line x1="-25" y1="-25" x2="-14" y2="-14"/>
+              <line x1="14" y1="14" x2="25" y2="25"/>
+              <line x1="25" y1="-25" x2="14" y2="-14"/>
+              <line x1="-14" y1="14" x2="-25" y2="25"/>
+            </g>
+          </svg>
+        </div>
+        <p class="culture-name">Philippines</p>
+        <h3 class="culture-title">Philippine<br/>Sun Embroidery</h3>
+        <p class="culture-desc">Rays of the Sampaguita sun hand-embroidered onto puff sleeves and wrap bodices. Inspired by the intricate piña weave traditions of Pampanga — reimagined for Gen Z and Gen Alpha who wear their roots with pride.</p>
+        <p class="culture-detail">Filipino Weave · Piña · Inabel</p>
+      </div>
+      <!-- Canada -->
+      <div class="culture-card ca">
+        <div class="culture-icon">
+          <svg width="30" height="34" viewBox="0 0 30 34" fill="none">
+            <path d="M15 2C15 2 7 9 3 15C6 11 9 13 11 15C9 17 5 22 7 28C9 24 13 22 15 24C17 22 21 24 23 28C25 22 21 17 19 15C21 13 24 11 27 15C23 9 15 2 15 2Z" fill="#8B6918" opacity=".6"/>
+            <line x1="15" y1="24" x2="15" y2="32" stroke="#8B6918" stroke-width="1.5" opacity=".5"/>
+          </svg>
+        </div>
+        <p class="culture-name">Canada</p>
+        <h3 class="culture-title">Canadian<br/>Maple Motif</h3>
+        <p class="culture-desc">The iconic maple leaf reimagined as a subtle appliqué — placed at the hip of asymmetric wraps, a quiet nod to Northern elegance and precision tailoring.</p>
+        <p class="culture-detail">Maple Embroidery</p>
+      </div>
+      <!-- India -->
+      <div class="culture-card in">
+        <div class="culture-icon">
+          <svg width="40" height="40" viewBox="0 0 100 100">
+            <g transform="translate(50,50)" fill="none" stroke="#E8D4A0" stroke-width="1.5" opacity=".75">
+              <ellipse rx="18" ry="7"/>
+              <ellipse rx="18" ry="7" transform="rotate(45)"/>
+              <ellipse rx="18" ry="7" transform="rotate(90)"/>
+              <ellipse rx="18" ry="7" transform="rotate(135)"/>
+              <circle r="4" fill="#E8D4A0"/>
+              <circle r="26" stroke-dasharray="3 3" opacity=".4"/>
+            </g>
+          </svg>
+        </div>
+        <p class="culture-name">India</p>
+        <h3 class="culture-title">Indian<br/>Zardozi Detail</h3>
+        <p class="culture-desc">Gold thread work inspired by Lucknowi Zardozi — the ancient craft of metallic embroidery — traced along hems, cuffs, and block-print borders.</p>
+        <p class="culture-detail">Indian Block Print</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRADITIONAL THREADS SPOTLIGHT ── -->
+<section class="terno-section">
+  <div class="terno-inner">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="section-label" style="margin-bottom:16px"><h2>Philippine Textiles</h2></div>
+        <h2 class="section-heading mb-0">Traditional threads,<br/><em>modern drip</em></h2>
+      </div>
+      <a href="/shop?culture=philippines" class="btn-primary" style="align-self:flex-end">Shop Philippines</a>
+    </div>
+    <div class="terno-grid">
+      <div class="terno-card">
+        <div class="terno-num">01</div>
+        <p class="terno-name">Terno Sleeves</p>
+        <p class="terno-origin">National Formal Wear · Manila</p>
+        <p class="terno-desc">The butterfly sleeve — once reserved for formal Filipino events — is back, softer and wearable. Our Terno-inspired puff sleeves bring the drama without the occasion.</p>
+        <span class="terno-tag">Butterfly Sleeve</span>
+      </div>
+      <div class="terno-card">
+        <div class="terno-num">02</div>
+        <p class="terno-name">Piña Cloth</p>
+        <p class="terno-origin">Pineapple Fibre · Kalibo, Aklan</p>
+        <p class="terno-desc">Woven from pineapple leaf fibres, piña is the Philippines' most precious textile. Translucent, breathable, and impossibly luxurious — now reimagined for daily wear.</p>
+        <span class="terno-tag">Luxury Fibre</span>
+      </div>
+      <div class="terno-card">
+        <div class="terno-num">03</div>
+        <p class="terno-name">Inabel Weave</p>
+        <p class="terno-origin">Ilocano Heritage · Ilocos Norte</p>
+        <p class="terno-desc">Geometric patterns handwoven on traditional wooden looms. Every Inabel cloth carries the story of Ilocano culture — bold, structured, unmistakably Filipino.</p>
+        <span class="terno-tag">Handwoven</span>
+      </div>
+      <div class="terno-card">
+        <div class="terno-num">04</div>
+        <p class="terno-name">T'nalak</p>
+        <p class="terno-origin">T'boli Tribe · Lake Sebu, Mindanao</p>
+        <p class="terno-desc">Dream-woven abaca cloth — each pattern received in sleep, then woven by hand. T'nalak is not just fabric; it is a spiritual conversation with ancestry.</p>
+        <span class="terno-tag">Indigenous · Sacred</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATEGORIES ── -->
+<section class="categories-section">
+  <div class="section-inner">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="section-label" style="margin-bottom:16px"><h2>Shop by Occasion</h2></div>
+        <h2 class="section-heading mb-0">Wear it<br/><em>anywhere</em></h2>
+      </div>
+      <a href="/shop" class="btn-outline">View All Collections</a>
+    </div>
+    <div class="categories-grid">
+      <a href="/shop?occasion=casual" class="category-card">
+        <div class="cat-bg cb1"><img src="images/p6-1.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <p class="cat-name">Casual</p>
+          <p class="cat-count">24 pieces</p>
+        </div>
+        <div class="cat-arrow">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </a>
+      <a href="/shop?occasion=workwear" class="category-card">
+        <div class="cat-bg cb2"><img src="images/p4-3.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <p class="cat-name">Workwear</p>
+          <p class="cat-count">18 pieces</p>
+        </div>
+        <div class="cat-arrow">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </a>
+      <a href="/shop?occasion=events" class="category-card">
+        <div class="cat-bg cb3"><img src="images/p9-1.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <p class="cat-name">Events</p>
+          <p class="cat-count">15 pieces</p>
+        </div>
+        <div class="cat-arrow">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </a>
+      <a href="/shop?occasion=travel" class="category-card">
+        <div class="cat-bg cb4"><img src="images/p10-2.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <p class="cat-name">Travel</p>
+          <p class="cat-count">12 pieces</p>
+        </div>
+        <div class="cat-arrow">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCTS ── -->
+<section class="products-section">
+  <div class="section-inner">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="section-label" style="margin-bottom:16px"><h2>Bestsellers</h2></div>
+        <h2 class="section-heading mb-0">Most loved<br/><em>this season</em></h2>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button onclick="filterProducts('all')" id="f-all" class="btn-primary" style="padding:10px 20px;font-size:10px">All</button>
+        <button onclick="filterProducts('philippines')" id="f-ph" class="btn-outline" style="padding:9px 16px;font-size:10px">Philippines</button>
+        <button onclick="filterProducts('canada')" id="f-ca" class="btn-outline" style="padding:9px 16px;font-size:10px">Canada</button>
+        <button onclick="filterProducts('india')" id="f-in" class="btn-outline" style="padding:9px 16px;font-size:10px">India</button>
+      </div>
+    </div>
+    <div class="products-grid" id="products-grid">
+      <a href="/products/emerald-satin-camisole" class="product-card" data-culture="philippines">
+        <div class="product-img-wrap">
+          <img src="images/p10-1.png" alt="Emerald Satin Camisole">
+          <span class="product-badge badge-new">New</span>
+          <span class="product-badge badge-ph" style="top:12px;right:12px;left:auto;">Satin Finish</span>
+          <div class="product-quick">Quick Add to Bag</div>
+        </div>
+        <p class="product-origin">Philippines · Satin</p>
+        <p class="product-name">Emerald Satin Camisole</p>
+        <div class="product-price">
+          <span class="price">₱2,850</span>
+        </div>
+      </a>
+      <a href="/products/cocoa-ribbed-crop-tee" class="product-card" data-culture="philippines">
+        <div class="product-img-wrap">
+          <img src="images/p1-1.jpeg" alt="Cocoa Ribbed Crop Tee">
+          <span class="product-badge badge-sale">−20%</span>
+          <span class="product-badge badge-ph" style="top:12px;right:12px;left:auto;">Ribbed Knit</span>
+          <div class="product-quick">Quick Add to Bag</div>
+        </div>
+        <p class="product-origin">Philippines · Ribbed Knit</p>
+        <p class="product-name">Cocoa Ribbed Crop Tee</p>
+        <div class="product-price">
+          <span class="price">₱2,400</span>
+          <span class="price-old">₱3,000</span>
+        </div>
+      </a>
+      <a href="/products/gingham-bow-crop-top" class="product-card" data-culture="canada">
+        <div class="product-img-wrap">
+          <img src="images/p9-1.png" alt="Gingham Bow Crop Top">
+          <span class="product-badge badge-new">New</span>
+          <div class="product-quick">Quick Add to Bag</div>
+        </div>
+        <p class="product-origin">Canada · Short Sleeve</p>
+        <p class="product-name">Gingham Bow Crop Top</p>
+        <div class="product-price">
+          <span class="price">₱3,200</span>
+        </div>
+      </a>
+      <a href="/products/lavender-bustier-coord" class="product-card" data-culture="india">
+        <div class="product-img-wrap">
+          <img src="images/p5-1.png" alt="Lavender Bustier Co-ord">
+          <div class="product-quick">Quick Add to Bag</div>
+        </div>
+        <p class="product-origin">India · Co-ord Set</p>
+        <p class="product-name">Lavender Bustier Co-ord</p>
+        <div class="product-price">
+          <span class="price">₱2,650</span>
+        </div>
+      </a>
+      <a href="/products/black-street-crop-tee" class="product-card" data-culture="philippines">
+        <div class="product-img-wrap">
+          <img src="images/p4-1.png" alt="Black Street Crop Tee">
+          <span class="product-badge badge-sale">−15%</span>
+          <div class="product-quick">Quick Add to Bag</div>
+        </div>
+        <p class="product-origin">Philippines · Street Style</p>
+        <p class="product-name">Black Street Crop Tee</p>
+        <div class="product-price">
+          <span class="price">₱2,125</span>
+          <span class="price-old">₱2,500</span>
+        </div>
+      </a>
+      <a href="/products/floral-puff-crop-top" class="product-card" data-culture="canada">
+        <div class="product-img-wrap">
+          <img src="images/p2-1.png" alt="Floral Puff Crop Top">
+          <span class="product-badge badge-new">New</span>
+          <span class="product-badge badge-ph" style="top:12px;right:12px;left:auto;">Puff Sleeve</span>
+          <div class="product-quick">Quick Add to Bag</div>
+        </div>
+        <p class="product-origin">Canada · Puff Sleeve</p>
+        <p class="product-name">Floral Puff Crop Top</p>
+        <div class="product-price">
+          <span class="price">₱3,500</span>
+        </div>
+      </a>
+      <a href="/products/ivory-lace-crop-top" class="product-card" data-culture="india">
+        <div class="product-img-wrap">
+          <img src="images/p6-1.png" alt="Ivory Lace Crop Top">
+          <div class="product-quick">Quick Add to Bag</div>
+        </div>
+        <p class="product-origin">India · Lace Detail</p>
+        <p class="product-name">Ivory Lace Crop Top</p>
+        <div class="product-price">
+          <span class="price">₱2,200</span>
+        </div>
+      </a>
+      <a href="/products/beige-balloon-sleeve-top" class="product-card" data-culture="canada">
+        <div class="product-img-wrap">
+          <img src="images/p3-1.png" alt="Beige Balloon Sleeve Top">
+          <span class="product-badge badge-sale">−25%</span>
+          <div class="product-quick">Quick Add to Bag</div>
+        </div>
+        <p class="product-origin">Canada · Long Sleeve</p>
+        <p class="product-name">Beige Balloon Sleeve Top</p>
+        <div class="product-price">
+          <span class="price">₱1,875</span>
+          <span class="price-old">₱2,500</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── ETHOS ── -->
+<section class="ethos-section">
+  <div class="ethos-inner">
+    <div class="ethos-left">
+      <p class="eyebrow">Our Philosophy</p>
+      <h2 class="ethos-heading">Designed to<br/><em>honour</em><br/>where we come<br/>from</h2>
+      <p class="ethos-body">Dressige was born from a simple belief: that your wardrobe should tell your story. We blend the intricate traditions of the Philippines, Canada, and India into modern silhouettes that carry history on every thread — without sacrificing the ease of everyday wear.</p>
+      <div class="ethos-stats">
+        <div class="stat-item">
+          <p class="stat-num">3</p>
+          <p class="stat-label">Cultures</p>
+        </div>
+        <div class="stat-item">
+          <p class="stat-num">48+</p>
+          <p class="stat-label">Unique Pieces</p>
+        </div>
+        <div class="stat-item">
+          <p class="stat-num">100%</p>
+          <p class="stat-label">Heritage Crafted</p>
+        </div>
+      </div>
+      <a href="/about" class="btn-primary" style="background:var(--gold);color:var(--charcoal);">Read Our Story</a>
+    </div>
+    <div class="ethos-right">
+      <div class="ethos-img" style="overflow:hidden;border-radius:2px;">
+        <img src="images/p10-2.png" alt="Heritage craftsmanship" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="ethos-img" style="overflow:hidden;border-radius:2px;margin-top:40px;">
+        <img src="images/p5-2.png" alt="Cultural design details" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials-section">
+  <div class="inner">
+    <div class="testimonials-header">
+      <p class="testi-eyebrow">What our customers say</p>
+      <h2 class="section-heading">Worn with <em>pride</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <p class="testi-text">"The Sunburst Puff Sleeve Top is the most beautiful piece I own. The Philippine sun embroidery is so intricate — people always ask where I got it."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av1">M</div>
+          <div>
+            <p class="testi-name">Maria Santos</p>
+            <p class="testi-role">Verified Buyer · Makati</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <p class="testi-text">"I wore the Maple Wrap Top to a gala and received so many compliments. The quality is extraordinary — it truly feels like heritage fashion."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av2">A</div>
+          <div>
+            <p class="testi-name">Anika Sharma</p>
+            <p class="testi-role">Verified Buyer · BGC</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <p class="testi-text">"The Piña Blouse is wearable art. I'm Filipino-Canadian and seeing our traditional fabrics done this beautifully — I literally cried. This is cultural pride."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av3">P</div>
+          <div>
+            <p class="testi-name">Priya Nair</p>
+            <p class="testi-role">Verified Buyer · QC</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BLOG ── -->
+<section class="blog-section">
+  <div class="section-inner">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="section-label" style="margin-bottom:16px"><h2>The Dressige Journal</h2></div>
+        <h2 class="section-heading mb-0">Culture, craft<br/><em>& style</em></h2>
+      </div>
+      <a href="/blogs" class="btn-outline">All Articles</a>
+    </div>
+    <div class="blog-grid">
+      <a href="/blogs/terno-for-genz" class="blog-card">
+        <div class="blog-img">
+          <div class="blog-img-inner bb1">
+            <img src="images/p1-1.jpeg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+          </div>
+        </div>
+        <p class="blog-tag">Philippine Heritage</p>
+        <h3 class="blog-title">Terno for Gen Z: Why the Butterfly Sleeve Is Back and It's Yours</h3>
+        <p class="blog-excerpt">The iconic Filipino butterfly sleeve is having a moment. Here's why Gen Z and Gen Alpha are claiming the Terno as their own — and how Dressige is leading the charge.</p>
+        <span class="blog-read-more">Read Article →</span>
+      </a>
+      <a href="/blogs/piña-weave-story" class="blog-card">
+        <div class="blog-img">
+          <div class="blog-img-inner bb2"><img src="images/p2-1.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div>
+        </div>
+        <p class="blog-tag">Craft Heritage</p>
+        <h3 class="blog-title">Piña Weave: The World's Most Luxurious Fabric Is Filipino</h3>
+        <p class="blog-excerpt">Why this rare pineapple-fibre textile is experiencing a global renaissance.</p>
+        <span class="blog-read-more">Read Article →</span>
+      </a>
+      <a href="/blogs/multicultural-dressing" class="blog-card">
+        <div class="blog-img">
+          <div class="blog-img-inner bb3"><img src="images/p5-2.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div>
+        </div>
+        <p class="blog-tag">Style Guide</p>
+        <h3 class="blog-title">How to Style Heritage Pieces as Your OOTD</h3>
+        <p class="blog-excerpt">From campus to content creation — our guide to wearing cultural fashion with full confidence.</p>
+        <span class="blog-read-more">Read Article →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <p class="wordmark">DRESSIGE</p>
+      <p class="brand-tagline">Three Cultures · One Identity</p>
+      <p>Women's fashion inspired by Philippine, Canadian, and Indian heritage. Every piece is a story. Every stitch, a tradition.</p>
+      <div class="footer-cultures">
+        <span class="fcult">🇵🇭 PH</span>
+        <span class="fcult">🇨🇦 CA</span>
+        <span class="fcult">🇮🇳 IN</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Collections</h4>
+      <ul>
+        <li><a href="/shop?culture=philippines">Philippine Sun</a></li>
+        <li><a href="/shop?culture=canada">Canadian Maple</a></li>
+        <li><a href="/shop?culture=india">Indian Zardozi</a></li>
+        <li><a href="/shop?is_new=true">New Arrivals</a></li>
+        <li><a href="/shop?is_on_sale=true">On Sale</a></li>
+        <li><a href="/shop">All Pieces</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Information</h4>
+      <ul>
+        <li><a href="/about">Our Story</a></li>
+        <li><a href="/blogs">The Journal</a></li>
+        <li><a href="/care-guide">Care Guide</a></li>
+        <li><a href="/sizing">Size Guide</a></li>
+        <li><a href="/sustainability">Sustainability</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="/orders">Track Order</a></li>
+        <li><a href="/returns">Returns</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+        <li><a href="tel:+639171234567">+63 917 123 4567</a></li>
+        <li><a href="mailto:hello@dressige.com">hello@dressige.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Dressige. Heritage Inspiration. Modern Expression.</p>
+    <div class="payment-icons">
+      <span class="pay-badge pay-gcash">GCash</span>
+      <span class="pay-badge pay-paymaya">PayMaya</span>
+      <span class="pay-badge pay-visa">VISA</span>
+      <span class="pay-badge pay-cod">COD</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function filterProducts(culture) {
+    const btns = { all: 'f-all', philippines: 'f-ph', canada: 'f-ca', india: 'f-in' };
+    Object.values(btns).forEach(id => {
+      const btn = document.getElementById(id);
+      btn.className = 'btn-outline';
+      btn.style.cssText = 'padding:9px 16px;font-size:10px';
+    });
+    const active = document.getElementById(btns[culture]);
+    active.className = 'btn-primary';
+    active.style.cssText = 'padding:10px 20px;font-size:10px';
+
+    const cards = document.querySelectorAll('#products-grid .product-card');
+    cards.forEach(card => {
+      const c = card.dataset.culture;
+      if (culture === 'all' || c === culture) {
+        card.style.display = '';
+        card.style.animation = 'fadeUp .4s ease both';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.culture-card, .category-card, .product-card, .testi-card, .blog-card, .terno-card, .ph-thread').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = `opacity .6s ${i * 0.06}s ease, transform .6s ${i * 0.06}s ease`;
+    observer.observe(el);
+  });
+
+  function animateStats() {
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const target = parseFloat(el.textContent);
+      if (isNaN(target)) return;
+      const suffix = el.textContent.replace(/[\d.]/g, '');
+      let start = 0;
+      const duration = 1800;
+      const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = (target < 10 ? Math.floor(eased * target) : Math.round(eased * target)) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) { animateStats(); statsObserver.disconnect(); }
+  }, { threshold: 0.5 });
+  const statsEl = document.querySelector('.ethos-stats');
+  if (statsEl) statsObserver.observe(statsEl);
+
+  document.querySelectorAll('.nav-icon').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.title === 'Search') {
+        const q = prompt('Search for a piece...');
+        if (q) window.location.href = `/shop?q=${encodeURIComponent(q)}`;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
