@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MentorMate — Expert Sessions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#">
+      <span class="brand-mark">M</span>
+      <span>MentorMate</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#services">Services</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <a href="#services">Services</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#about">About</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+
+  <main>
+    <section class="hero-shell">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-layout">
+        <aside class="profile-card reveal">
+          <div class="profile-cover"></div>
+          <div class="avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=240&q=80" alt="Mentor portrait" class="avatar">
+            <span class="verified" aria-label="Verified mentor">✓</span>
+          </div>
+          <h1>Shreya Khandelwal</h1>
+          <p class="role">Data Scientist · AI Mentor · Career Coach</p>
+          <p class="bio">Book focused 1:1 calls, resume feedback, referrals, and interview preparation with an experienced analytics leader.</p>
+          <div class="stats-grid">
+            <div><strong>4.9/5</strong><span>Average rating</span></div>
+            <div><strong>900+</strong><span>Learners helped</span></div>
+            <div><strong>24h</strong><span>Avg. response</span></div>
+          </div>
+          <div class="badge-row" aria-label="Achievements">
+            <span>Top 1%</span>
+            <span>Popular</span>
+            <span>AI MVP</span>
+          </div>
+        </aside>
+
+        <div class="hero-content reveal delay-1">
+          <p class="eyebrow">Personal mentorship marketplace page</p>
+          <h2>Choose a session and get practical career guidance.</h2>
+          <p class="hero-copy">A clean, light themed booking page inspired by creator storefronts — redesigned with a bold <strong>#0B5ADB</strong> accent, interactive service cards, and a responsive booking experience.</p>
+          <div class="hero-actions">
+            <a href="#services" class="btn primary">View sessions</a>
+            <a href="#about" class="btn secondary">Know the mentor</a>
+          </div>
+          <div class="trust-strip">
+            <span>Secure checkout</span>
+            <span>Calendar invite</span>
+            <span>Video meeting</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container content-grid" id="services">
+      <div class="main-column">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Bookable products</p>
+          <h2>Services you can book</h2>
+        </div>
+
+        <div class="filter-bar reveal">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="career">Career</button>
+          <button class="filter" data-filter="interview">Interview</button>
+          <button class="filter" data-filter="dm">Priority DM</button>
+        </div>
+
+        <div class="service-list">
+          <article class="service-card reveal" data-category="career">
+            <div class="service-icon">🎯</div>
+            <div class="service-info">
+              <div class="service-topline"><span class="rating">★ 5.0</span><span>Video Meeting</span></div>
+              <h3>Data Science Learning Guidance</h3>
+              <p>Get a personalized learning roadmap, project suggestions, and accountability plan.</p>
+              <div class="meta"><span>30 mins</span><span>Beginner friendly</span></div>
+            </div>
+            <div class="service-price"><span>$5</span><button class="book-btn" data-service="Data Science Learning Guidance" data-price="$5">Book</button></div>
+          </article>
+
+          <article class="service-card reveal" data-category="career">
+            <div class="service-icon">🧭</div>
+            <div class="service-info">
+              <div class="service-topline"><span class="rating">★ 5.0</span><span>Video Meeting</span></div>
+              <h3>1:1 Mentorship</h3>
+              <p>Discuss goals, blockers, portfolio strategy, and the next best move for your profile.</p>
+              <div class="meta"><span>30 mins</span><span>Action plan included</span></div>
+            </div>
+            <div class="service-price"><span>$4</span><button class="book-btn" data-service="1:1 Mentorship" data-price="$4">Book</button></div>
+          </article>
+
+          <article class="service-card reveal" data-category="career">
+            <div class="service-icon">📄</div>
+            <div class="service-info">
+              <div class="service-topline"><span class="rating">★ 4.9</span><span>Video Meeting</span></div>
+              <h3>Resume Review</h3>
+              <p>Improve your resume with clear positioning, measurable impact, and recruiter-friendly edits.</p>
+              <div class="meta"><span>30 mins</span><span>ATS focused</span></div>
+            </div>
+            <div class="service-price"><span>$4</span><button class="book-btn" data-service="Resume Review" data-price="$4">Book</button></div>
+          </article>
+
+          <article class="service-card reveal" data-category="interview">
+            <div class="service-icon">💬</div>
+            <div class="service-info">
+              <div class="service-topline"><span class="rating">★ 4.8</span><span>Video Meeting</span></div>
+              <h3>Mock Interview: Data Scientist</h3>
+              <p>Practice product sense, SQL, ML fundamentals, and behavioral answers with feedback.</p>
+              <div class="meta"><span>45 mins</span><span>Feedback notes</span></div>
+            </div>
+            <div class="service-price"><span>$7</span><button class="book-btn" data-service="Mock Interview: Data Scientist" data-price="$7">Book</button></div>
+          </article>
+
+          <article class="service-card reveal" data-category="dm">
+            <div class="service-icon">⚡</div>
+            <div class="service-info">
+              <div class="service-topline"><span class="rating">Popular</span><span>Priority DM</span></div>
+              <h3>Get Referred</h3>
+              <p>Share your profile and target role to receive referral guidance and application tips.</p>
+              <div class="meta"><span>Replies in 2 days</span><span>Async</span></div>
+            </div>
+            <div class="service-price"><span>$1</span><button class="book-btn" data-service="Get Referred" data-price="$1">Book</button></div>
+          </article>
+        </div>
+
+        <article class="bundle-card reveal">
+          <div>
+            <span class="bundle-label">Best Deal</span>
+            <h3>Data Scientist — Basic to Advanced</h3>
+            <p>Bundle mentorship, resume review, interview prep, and Q&A into one guided career sprint.</p>
+            <ul>
+              <li>6 included products</li>
+              <li>Personal roadmap</li>
+              <li>Interview preparation checklist</li>
+            </ul>
+          </div>
+          <div class="bundle-price"><small>$27</small><strong>$25</strong><button class="book-btn" data-service="Data Scientist — Basic to Advanced" data-price="$25">Book package</button></div>
+        </article>
+
+        <section class="reviews" id="reviews">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Ratings and feedback</p>
+            <h2>Learners love the clarity</h2>
+          </div>
+          <div class="reviews-summary reveal">
+            <strong>4.9/5</strong>
+            <span>Based on 59 ratings</span>
+            <div class="stars">★★★★★</div>
+          </div>
+          <div class="review-grid">
+            <article class="review-card reveal"><span>5/5</span><p>“The session converted my scattered questions into a concrete 30-day action plan.”</p><small>Ananya · Mar 2026</small></article>
+            <article class="review-card reveal"><span>5/5</span><p>“Resume feedback was specific, practical, and immediately improved my profile story.”</p><small>Rahul · Feb 2026</small></article>
+            <article class="review-card reveal"><span>5/5</span><p>“Great mock interview. I left with stronger answers and a checklist for practice.”</p><small>Maya · Jan 2026</small></article>
+          </div>
+        </section>
+
+        <section class="about-section reveal" id="about">
+          <p class="eyebrow">About me</p>
+          <h2>Helping early professionals enter data and AI roles.</h2>
+          <p>I mentor students and working professionals on data science foundations, analytics storytelling, interview preparation, and personal branding. My sessions are designed to be direct, structured, and full of next steps you can use right away.</p>
+          <div class="about-pills"><span>Machine Learning</span><span>Analytics</span><span>Career Strategy</span><span>LinkedIn Growth</span></div>
+        </section>
+      </div>
+
+      <aside class="side-column">
+        <div class="sticky-card reveal delay-2">
+          <h3>Ready to book?</h3>
+          <p>Select a service card or start with a discovery call.</p>
+          <button class="btn primary full book-btn" data-service="Discovery Call" data-price="$2">Book discovery call</button>
+          <div class="side-note"><span>✓</span> Instant confirmation after checkout</div>
+          <div class="side-note"><span>✓</span> Reschedule when needed</div>
+          <div class="side-note"><span>✓</span> Mobile-first experience</div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="faq container" id="faq">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Questions</p>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq-list reveal">
+        <button class="faq-item"><span>How do I receive the meeting link?</span><strong>+</strong></button>
+        <div class="faq-panel">After booking, a calendar invite and video meeting link are sent to your email.</div>
+        <button class="faq-item"><span>Can I reschedule?</span><strong>+</strong></button>
+        <div class="faq-panel">Yes. Use the reschedule link in your confirmation email before the session starts.</div>
+        <button class="faq-item"><span>What should I prepare?</span><strong>+</strong></button>
+        <div class="faq-panel">Bring your resume, LinkedIn profile, target roles, and a short list of questions.</div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close modal">×</button>
+      <span class="modal-kicker">Booking preview</span>
+      <h2 id="modalTitle">Book session</h2>
+      <p id="modalService">Selected service</p>
+      <form class="booking-form">
+        <label>Name<input type="text" placeholder="Your name" required></label>
+        <label>Email<input type="email" placeholder="you@example.com" required></label>
+        <label>Goal<textarea placeholder="What would you like to discuss?"></textarea></label>
+        <button type="submit" class="btn primary full">Confirm request</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 MentorMate. Light theme profile booking page.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
